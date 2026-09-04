@@ -1,8 +1,10 @@
 "use client";
 
+import Image from "next/image";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { crearMarca } from "@/lib/actions/marcas";
+import { SubidaImagen } from "@/components/admin/SubidaImagen";
 
 export function MarcaForm() {
   const router = useRouter();
@@ -42,13 +44,24 @@ export function MarcaForm() {
       </div>
       <div>
         <label className="block text-xs font-medium text-gray-700 mb-1">
-          Logo (URL, opcional)
+          Logo (opcional)
         </label>
-        <input
-          value={logoUrl}
-          onChange={(e) => setLogoUrl(e.target.value)}
-          className="rounded border border-gray-300 px-3 py-2 text-sm w-64"
-        />
+        <div className="flex items-center gap-2">
+          {logoUrl && (
+            <Image
+              src={logoUrl}
+              alt=""
+              width={32}
+              height={32}
+              className="rounded object-contain border border-gray-200"
+            />
+          )}
+          <SubidaImagen
+            carpeta="marcas"
+            etiqueta={logoUrl ? "Cambiar logo" : "Subir logo"}
+            onSubido={([url]) => setLogoUrl(url)}
+          />
+        </div>
       </div>
       <button
         type="submit"
