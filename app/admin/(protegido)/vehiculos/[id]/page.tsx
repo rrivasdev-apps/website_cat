@@ -1,6 +1,8 @@
 import { notFound } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import { VehiculoForm } from "@/components/admin/VehiculoForm";
+import { EspecificacionesSeccion } from "@/components/admin/EspecificacionesSeccion";
+import { GrupoEspec } from "@/lib/generated/prisma/enums";
 
 export default async function EditarVehiculoPage({
   params,
@@ -9,9 +11,10 @@ export default async function EditarVehiculoPage({
 }) {
   const { id } = await params;
 
-  const [vehiculo, marcas] = await Promise.all([
+  const [vehiculo, marcas, especificaciones] = await Promise.all([
     prisma.vehiculo.findUnique({ where: { id } }),
     prisma.marca.findMany({ orderBy: { nombre: "asc" } }),
+    prisma.especificacion.findMany({ where: { vehiculoId: id } }),
   ]);
 
   if (!vehiculo) notFound();
@@ -43,6 +46,26 @@ export default async function EditarVehiculoPage({
           publicado: vehiculo.publicado,
         }}
       />
+
+      <div className="mt-8 bg-white p-6 rounded-lg shadow border border-gray-200 space-y-8">
+        <h2 className="text-base font-semibold">Especificaciones</h2>
+        {(
+          [
+            GrupoEspec.CARACTERISTICAS,
+            GrupoEspec.EQUIPAMIENTO,
+            GrupoEspec.EXTRAS,
+          ] as const
+        ).map((grupo) => (
+          <EspecificacionesSeccion
+            key={grupo}
+            vehiculoId={vehiculo.id}
+            grupo={grupo}
+            especificaciones={especificaciones.filter(
+              (e) => e.grupo === grupo,
+            )}
+          />
+        ))}
+      </div>
     </div>
   );
 }
