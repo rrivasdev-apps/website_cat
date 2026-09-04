@@ -1,5 +1,6 @@
 import { Anton, Work_Sans } from "next/font/google";
 import { Analytics } from "@/components/public/Analytics";
+import { Header } from "@/components/public/Header";
 
 const anton = Anton({
   subsets: ["latin"],
@@ -22,6 +23,7 @@ export default function PublicLayout({
       className={`${anton.variable} ${workSans.variable} font-body bg-ink text-ivory min-h-screen`}
     >
       <Analytics />
+      <Header />
       {children}
     </div>
   );

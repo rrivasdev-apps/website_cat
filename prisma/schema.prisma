@@ -114,6 +114,7 @@ model Slide {
 model ConfiguracionGlobal {
   id                       Int       @id @default(1)
   maxMasVendidos           Int       @default(5)
+  sliderIntervaloSegundos  Int       @default(6)
   tasaBCVVigente           Decimal?  @db.Decimal(12, 4)
   fechaTasaBCV             DateTime?
   tarifaServicioFija       Decimal?  @db.Decimal(12, 2)

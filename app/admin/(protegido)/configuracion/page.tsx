@@ -12,6 +12,7 @@ export default async function ConfiguracionPage() {
       <ConfiguracionForm
         configuracion={{
           maxMasVendidos: config?.maxMasVendidos ?? 5,
+          sliderIntervaloSegundos: config?.sliderIntervaloSegundos ?? 6,
           tiempoPreparacionDias: config?.tiempoPreparacionDias ?? 15,
           tiempoTransitoDias: config?.tiempoTransitoDias ?? 60,
           tiempoAduanaDias: config?.tiempoAduanaDias ?? 15,

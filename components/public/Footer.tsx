@@ -43,6 +43,22 @@ export async function Footer() {
                 Preguntas frecuentes
               </Link>
             </li>
+            <li>
+              <Link
+                href="/servicios"
+                className="hover:text-accent transition-colors"
+              >
+                Servicios
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/contacto"
+                className="hover:text-accent transition-colors"
+              >
+                Contacto
+              </Link>
+            </li>
           </ul>
         </div>
 

@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { formatoUSD } from "@/lib/formato";
 
 type SlideVehiculo = {
@@ -16,8 +16,22 @@ type SlideVehiculo = {
   fotoPortada: string | null;
 };
 
-export function HeroSlider({ slides }: { slides: SlideVehiculo[] }) {
+export function HeroSlider({
+  slides,
+  intervaloSegundos = 6,
+}: {
+  slides: SlideVehiculo[];
+  intervaloSegundos?: number;
+}) {
   const [indice, setIndice] = useState(0);
+
+  useEffect(() => {
+    if (slides.length <= 1) return;
+    const id = setInterval(() => {
+      setIndice((i) => (i + 1) % slides.length);
+    }, intervaloSegundos * 1000);
+    return () => clearInterval(id);
+  }, [slides.length, intervaloSegundos]);
 
   if (slides.length === 0) return null;
 

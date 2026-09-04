@@ -29,6 +29,7 @@ export async function guardarConfiguracion(input: ConfiguracionInput) {
 
   const datosDb = {
     maxMasVendidos: datos.maxMasVendidos,
+    sliderIntervaloSegundos: datos.sliderIntervaloSegundos,
     tiempoPreparacionDias: datos.tiempoPreparacionDias,
     tiempoTransitoDias: datos.tiempoTransitoDias,
     tiempoAduanaDias: datos.tiempoAduanaDias,
@@ -50,4 +51,5 @@ export async function guardarConfiguracion(input: ConfiguracionInput) {
 
   revalidatePath("/admin/configuracion");
   revalidatePath("/admin/vehiculos");
+  revalidatePath("/");
 }

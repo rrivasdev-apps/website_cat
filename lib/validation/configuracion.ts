@@ -2,6 +2,7 @@ import { z } from "zod";
 
 export const configuracionSchema = z.object({
   maxMasVendidos: z.number().int().min(1).max(20),
+  sliderIntervaloSegundos: z.number().int().min(2).max(30),
   tiempoPreparacionDias: z.number().int().nonnegative(),
   tiempoTransitoDias: z.number().int().nonnegative(),
   tiempoAduanaDias: z.number().int().nonnegative(),

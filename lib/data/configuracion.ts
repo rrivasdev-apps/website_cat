@@ -7,6 +7,7 @@ export async function obtenerConfiguracionPublica() {
 
   return {
     maxMasVendidos: config?.maxMasVendidos ?? 5,
+    sliderIntervaloSegundos: config?.sliderIntervaloSegundos ?? 6,
     informacionImportante: config?.informacionImportante ?? null,
     whatsappNumero: config?.whatsappNumero ?? null,
     whatsappMensajePlantilla: config?.whatsappMensajePlantilla ?? null,

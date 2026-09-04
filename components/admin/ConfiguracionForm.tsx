@@ -67,7 +67,22 @@ export function ConfiguracionForm({
               <p className={errorClass}>{errors.maxMasVendidos.message}</p>
             )}
           </div>
-          <div />
+
+          <div>
+            <label className={labelClass}>
+              Intervalo del slider principal (segundos)
+            </label>
+            <input
+              type="number"
+              {...register("sliderIntervaloSegundos", { valueAsNumber: true })}
+              className={inputClass}
+            />
+            {errors.sliderIntervaloSegundos && (
+              <p className={errorClass}>
+                {errors.sliderIntervaloSegundos.message}
+              </p>
+            )}
+          </div>
 
           <div>
             <label className={labelClass}>Preparación (días)</label>
