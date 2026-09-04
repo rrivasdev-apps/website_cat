@@ -4,11 +4,8 @@ import { revalidatePath } from "next/cache";
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { Prisma } from "@/lib/generated/prisma/client";
-import {
-  vehiculoSchema,
-  MAX_MAS_VENDIDOS,
-  type VehiculoInput,
-} from "@/lib/validation/vehiculo";
+import { vehiculoSchema, type VehiculoInput } from "@/lib/validation/vehiculo";
+import { obtenerMaxMasVendidos } from "@/lib/actions/configuracion";
 
 async function requireSession() {
   const session = await auth();
@@ -18,15 +15,18 @@ async function requireSession() {
 async function excedeLimiteMasVendidos(
   esMasVendido: boolean,
   excluirId?: string,
-): Promise<boolean> {
-  if (!esMasVendido) return false;
-  const cantidad = await prisma.vehiculo.count({
-    where: {
-      esMasVendido: true,
-      ...(excluirId ? { id: { not: excluirId } } : {}),
-    },
-  });
-  return cantidad >= MAX_MAS_VENDIDOS;
+): Promise<{ excede: boolean; max: number }> {
+  if (!esMasVendido) return { excede: false, max: 0 };
+  const [cantidad, max] = await Promise.all([
+    prisma.vehiculo.count({
+      where: {
+        esMasVendido: true,
+        ...(excluirId ? { id: { not: excluirId } } : {}),
+      },
+    }),
+    obtenerMaxMasVendidos(),
+  ]);
+  return { excede: cantidad >= max, max };
 }
 
 function esErrorSlugDuplicado(error: unknown): boolean {
@@ -44,9 +44,10 @@ export async function crearVehiculo(
   await requireSession();
   const datos = vehiculoSchema.parse(input);
 
-  if (await excedeLimiteMasVendidos(datos.esMasVendido)) {
+  const limite = await excedeLimiteMasVendidos(datos.esMasVendido);
+  if (limite.excede) {
     return {
-      error: `Ya hay ${MAX_MAS_VENDIDOS} vehículos marcados como "más vendido". Quita alguno antes de agregar otro.`,
+      error: `Ya hay ${limite.max} vehículos marcados como "más vendido". Quita alguno antes de agregar otro.`,
     };
   }
 
@@ -69,9 +70,10 @@ export async function actualizarVehiculo(
   await requireSession();
   const datos = vehiculoSchema.parse(input);
 
-  if (await excedeLimiteMasVendidos(datos.esMasVendido, id)) {
+  const limite = await excedeLimiteMasVendidos(datos.esMasVendido, id);
+  if (limite.excede) {
     return {
-      error: `Ya hay ${MAX_MAS_VENDIDOS} vehículos marcados como "más vendido". Quita alguno antes de agregar otro.`,
+      error: `Ya hay ${limite.max} vehículos marcados como "más vendido". Quita alguno antes de agregar otro.`,
     };
   }
 

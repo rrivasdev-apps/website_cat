@@ -156,18 +156,19 @@ model Slide {
 }
 
 model ConfiguracionGlobal {
-  id                       Int      @id @default(1)
-  tasaBCVVigente           Decimal  @db.Decimal(12, 4)
-  fechaTasaBCV             DateTime
-  tarifaServicioFija       Decimal  @db.Decimal(12, 2)
-  tiempoPreparacionDias    Int      @default(15)
-  tiempoTransitoDias       Int      @default(60)
-  tiempoAduanaDias         Int      @default(15)
-  informacionImportante    String   @db.Text
-  whatsappNumero           String
-  whatsappMensajePlantilla String   @db.Text
+  id                       Int       @id @default(1)
+  maxMasVendidos           Int       @default(5)
+  tasaBCVVigente           Decimal?  @db.Decimal(12, 4)
+  fechaTasaBCV             DateTime?
+  tarifaServicioFija       Decimal?  @db.Decimal(12, 2)
+  tiempoPreparacionDias    Int       @default(15)
+  tiempoTransitoDias       Int       @default(60)
+  tiempoAduanaDias         Int       @default(15)
+  informacionImportante    String?   @db.Text
+  whatsappNumero           String?
+  whatsappMensajePlantilla String?   @db.Text
   bannerDestacadosUrl      String?
-  footerTextoLegal         String?  @db.Text
+  footerTextoLegal         String?   @db.Text
 }
 
 model UsuarioAdmin {
@@ -190,6 +191,13 @@ Notas de diseño del modelo:
   puntual difiera del valor global sin duplicar la tabla de configuración.
 - `precioFinalOverride` existe por si el negocio necesita fijar un precio manual que
   no siga la fórmula automática (ver sección 6).
+- `ConfiguracionGlobal.maxMasVendidos` es editable desde `/admin/configuracion`
+  (default 5) — reemplaza lo que antes era una constante hardcodeada, para que el
+  negocio pueda ajustarlo sin tocar código.
+- Los campos de `ConfiguracionGlobal` ligados a decisiones aún pendientes del
+  negocio (tasa BCV, tarifa fija, información importante, WhatsApp — ver
+  sección 11) son opcionales (`?`) en vez de obligatorios: el panel ya existe y se
+  puede publicar el sitio sin que esos valores estén definidos todavía.
 
 ## 5. Home — 5 secciones (en orden)
 
@@ -306,5 +314,8 @@ BLOB_READ_WRITE_TOKEN=
 - [ ] Nombre de marca, dominio y paleta del nuevo proyecto.
 - [ ] Número de WhatsApp y texto exacto de la plantilla de mensaje.
 - [ ] Textos legales exactos (registro fiscal, licencias) para el footer.
-- [x] Máximo de vehículos permitido en el slider de "Más Vendidos" — **5**, confirmado y aplicado en el admin (`MAX_MAS_VENDIDOS` en `lib/validation/vehiculo.ts`).
+- [x] Máximo de vehículos permitido en el slider de "Más Vendidos" — ya no es un
+      valor fijo en código: es editable por el negocio en
+      `/admin/configuracion` → "Más vendidos y tiempos de entrega"
+      (`ConfiguracionGlobal.maxMasVendidos`, default 5 si no se ha configurado).
 - [x] Proveedor final de base de datos/imágenes — **Supabase Postgres** + **Vercel Blob** (store público), ya en uso.

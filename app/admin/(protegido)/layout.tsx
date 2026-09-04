@@ -26,6 +26,12 @@ export default function AdminProtegidoLayout({
             >
               Marcas
             </Link>
+            <Link
+              href="/admin/configuracion"
+              className="text-gray-900 hover:text-gray-600"
+            >
+              Configuración
+            </Link>
           </nav>
 
           <form

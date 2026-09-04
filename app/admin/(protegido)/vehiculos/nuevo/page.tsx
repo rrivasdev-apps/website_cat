@@ -1,9 +1,13 @@
 import Link from "next/link";
 import { prisma } from "@/lib/prisma";
 import { VehiculoForm } from "@/components/admin/VehiculoForm";
+import { obtenerMaxMasVendidos } from "@/lib/actions/configuracion";
 
 export default async function NuevoVehiculoPage() {
-  const marcas = await prisma.marca.findMany({ orderBy: { nombre: "asc" } });
+  const [marcas, maxMasVendidos] = await Promise.all([
+    prisma.marca.findMany({ orderBy: { nombre: "asc" } }),
+    obtenerMaxMasVendidos(),
+  ]);
 
   if (marcas.length === 0) {
     return (
@@ -24,7 +28,7 @@ export default async function NuevoVehiculoPage() {
   return (
     <div>
       <h1 className="text-lg font-semibold mb-6">Nuevo vehículo</h1>
-      <VehiculoForm marcas={marcas} />
+      <VehiculoForm marcas={marcas} maxMasVendidos={maxMasVendidos} />
     </div>
   );
 }

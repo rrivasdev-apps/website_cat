@@ -36,8 +36,6 @@ export const vehiculoSchema = z.object({
 
 export type VehiculoInput = z.infer<typeof vehiculoSchema>;
 
-export const MAX_MAS_VENDIDOS = 5;
-
 export const TIPO_AUTO_LABELS: Record<TipoAuto, string> = {
   SUV: "SUV",
   SEDAN: "Sedán",

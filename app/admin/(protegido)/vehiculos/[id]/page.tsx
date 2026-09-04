@@ -4,6 +4,7 @@ import { VehiculoForm } from "@/components/admin/VehiculoForm";
 import { EspecificacionesSeccion } from "@/components/admin/EspecificacionesSeccion";
 import { GaleriaVehiculo } from "@/components/admin/GaleriaVehiculo";
 import { GrupoEspec } from "@/lib/generated/prisma/enums";
+import { obtenerMaxMasVendidos } from "@/lib/actions/configuracion";
 
 export default async function EditarVehiculoPage({
   params,
@@ -12,12 +13,14 @@ export default async function EditarVehiculoPage({
 }) {
   const { id } = await params;
 
-  const [vehiculo, marcas, especificaciones, fotos] = await Promise.all([
-    prisma.vehiculo.findUnique({ where: { id } }),
-    prisma.marca.findMany({ orderBy: { nombre: "asc" } }),
-    prisma.especificacion.findMany({ where: { vehiculoId: id } }),
-    prisma.foto.findMany({ where: { vehiculoId: id } }),
-  ]);
+  const [vehiculo, marcas, especificaciones, fotos, maxMasVendidos] =
+    await Promise.all([
+      prisma.vehiculo.findUnique({ where: { id } }),
+      prisma.marca.findMany({ orderBy: { nombre: "asc" } }),
+      prisma.especificacion.findMany({ where: { vehiculoId: id } }),
+      prisma.foto.findMany({ where: { vehiculoId: id } }),
+      obtenerMaxMasVendidos(),
+    ]);
 
   if (!vehiculo) notFound();
 
@@ -28,6 +31,7 @@ export default async function EditarVehiculoPage({
       </h1>
       <VehiculoForm
         marcas={marcas}
+        maxMasVendidos={maxMasVendidos}
         vehiculo={{
           id: vehiculo.id,
           slug: vehiculo.slug,

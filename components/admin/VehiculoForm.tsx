@@ -10,7 +10,6 @@ import {
   TIPO_AUTO_LABELS,
   CONDICION_LABELS,
   DISPONIBILIDAD_LABELS,
-  MAX_MAS_VENDIDOS,
 } from "@/lib/validation/vehiculo";
 import { crearVehiculo, actualizarVehiculo } from "@/lib/actions/vehiculos";
 import { slugify } from "@/lib/slug";
@@ -22,9 +21,11 @@ type VehiculoExistente = VehiculoInput & { id: string };
 export function VehiculoForm({
   marcas,
   vehiculo,
+  maxMasVendidos,
 }: {
   marcas: Marca[];
   vehiculo?: VehiculoExistente;
+  maxMasVendidos: number;
 }) {
   const router = useRouter();
   const [errorGeneral, setErrorGeneral] = useState<string | null>(null);
@@ -364,7 +365,7 @@ export function VehiculoForm({
                 className="h-4 w-4"
               />
               <label htmlFor="esMasVendido" className="text-sm text-gray-700">
-                Más vendido (máx. {MAX_MAS_VENDIDOS} a la vez)
+                Más vendido (máx. {maxMasVendidos} a la vez)
               </label>
             </div>
             <label className="block text-xs text-gray-500 mt-2 mb-1">
