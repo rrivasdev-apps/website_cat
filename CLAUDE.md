@@ -25,6 +25,37 @@ El nombre de marca, dominio, paleta y logo de este proyecto son
 **PENDIENTE DE CONFIRMAR** — no reutilizar el nombre ni las imágenes de ningún sitio
 usado como referencia visual durante el diseño de este documento.
 
+### Mercado objetivo y tono del contenido
+
+Este sitio es **para Venezuela** (inicialmente — si el negocio se expande a otros
+países más adelante, esto se puede reconsiderar, pero no anticiparlo). Todo el texto
+del sitio (UI, botones, FAQ, descripciones de vehículos, mensajes de WhatsApp,
+mensajes de error, textos del panel de administración) debe sonar natural para un
+venezolano. En concreto:
+
+- **Tratamiento de "tú", nunca "vos".** Nada de voseo rioplatense/centroamericano:
+  ni conjugaciones ("tenés", "sos", "vení", "mirá", "escribinos") ni el pronombre
+  "vos". La forma correcta es la de "tú" ("tienes", "eres", "ven", "mira",
+  "escríbenos").
+- **Nunca "vosotros".** Es de España, no se usa en Venezuela ni en el resto de
+  Latinoamérica — usar "ustedes".
+- **Sin modismos marcados de otro país.** Evitar jerga reconociblemente de otro
+  lado — ejemplos a NO usar: "che", "boludo", "pibe", "laburo", "quilombo"
+  (Argentina/Uruguay); "órale", "güey", "chido", "padrísimo" (México); "vale", "tío",
+  "flipar", "curro" (España); "parcero", "parce" (Colombia). Si al escribir un texto
+  hay duda sobre si una palabra es un modismo regional marcado, elegir la
+  alternativa más neutra/estándar en español.
+- **Vocabulario:** "vehículo" es el término principal del catálogo (neutro, ya en uso
+  en todo el sitio) — "carro" es válido y muy venezolano si hace falta variar, pero
+  evitar "coche" (España) y "auto" (más de cono sur) como palabra por defecto.
+- Ya son coherentes con Venezuela y **hay que mantenerlos**: precios en USD, tasa
+  BCV (Banco Central de Venezuela) como referencia cambiaria, y WhatsApp como canal
+  de contacto principal — no reemplazar por convenciones de otro país.
+
+Antes de dar por bueno un texto nuevo (o revisado) para el sitio, releerlo pensando
+"¿esto es lo que diría alguien en Caracas, Valencia o Maracaibo?" — si suena a otro
+país, ajustarlo.
+
 ## 2. Stack técnico
 
 | Capa | Elección | Motivo |
