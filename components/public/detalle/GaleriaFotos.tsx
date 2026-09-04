@@ -15,8 +15,8 @@ export function GaleriaFotos({
   if (fotos.length === 0) return null;
 
   return (
-    <section>
-      <h2 className="font-display text-2xl tracking-wide text-ivory mb-4">
+    <section className="border border-line rounded-lg bg-panel px-6 py-4">
+      <h2 className="font-display text-xl tracking-wide text-ivory mb-4">
         GALERÍA
       </h2>
 

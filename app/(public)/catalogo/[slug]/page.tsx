@@ -110,21 +110,15 @@ export default async function DetalleVehiculoPage({
           nombre={`${vehiculo.marca.nombre} ${vehiculo.modelo}`}
         />
 
-        <section>
-          <h2 className="font-display text-2xl tracking-wide text-ivory mb-4">
-            DESCRIPCIÓN
-          </h2>
+        <AcordeonSeccion titulo="DESCRIPCIÓN">
           <p className="text-sm text-muted leading-relaxed whitespace-pre-line">
             {vehiculo.descripcion}
           </p>
-        </section>
+        </AcordeonSeccion>
 
-        <section>
-          <h2 className="font-display text-2xl tracking-wide text-ivory mb-4">
-            EQUIPAMIENTO
-          </h2>
+        <AcordeonSeccion titulo="EQUIPAMIENTO">
           <ListaEspecificaciones especificaciones={equipamiento} />
-        </section>
+        </AcordeonSeccion>
 
         <AcordeonSeccion titulo="COMPRA">
           <BloqueCompra
