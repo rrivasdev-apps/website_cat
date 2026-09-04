@@ -306,5 +306,5 @@ BLOB_READ_WRITE_TOKEN=
 - [ ] Nombre de marca, dominio y paleta del nuevo proyecto.
 - [ ] Número de WhatsApp y texto exacto de la plantilla de mensaje.
 - [ ] Textos legales exactos (registro fiscal, licencias) para el footer.
-- [ ] Máximo de vehículos permitido en el slider de "Más Vendidos".
-- [ ] Proveedor final de base de datos/imágenes (Neon vs Supabase, Vercel Blob vs Cloudinary) si el cliente tiene preferencia de costos.
+- [x] Máximo de vehículos permitido en el slider de "Más Vendidos" — **5**, confirmado y aplicado en el admin (`MAX_MAS_VENDIDOS` en `lib/validation/vehiculo.ts`).
+- [x] Proveedor final de base de datos/imágenes — **Supabase Postgres** + **Vercel Blob** (store público), ya en uso.
