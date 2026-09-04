@@ -28,6 +28,7 @@ export function Catalogo({
   const [cursor, setCursor] = useState<string | null>(null);
   const [cargando, setCargando] = useState(true);
   const [cargandoMas, setCargandoMas] = useState(false);
+  const [mostrarFiltros, setMostrarFiltros] = useState(false);
 
   const construirParams = (cursorActual: string | null) => {
     const params = new URLSearchParams();
@@ -66,6 +67,8 @@ export function Catalogo({
   const selectClass =
     "w-full sm:w-auto bg-panel border border-line rounded px-3 py-2 text-sm text-ivory focus:outline-none focus:border-accent";
 
+  const filtrosActivos = [origen, condicion, tipo, marca].filter(Boolean).length;
+
   return (
     <section id="catalogo" className="mx-auto max-w-[1600px] px-6 py-20">
       <p className="text-accent text-sm font-semibold uppercase tracking-widest mb-2">
@@ -75,71 +78,105 @@ export function Catalogo({
         VEHÍCULOS DISPONIBLES
       </h2>
 
-      <div className="flex flex-col sm:flex-row sm:flex-wrap gap-3 mb-10">
-        <select
-          value={marca}
-          onChange={(e) => setMarca(e.target.value)}
-          className={selectClass}
+      <button
+        type="button"
+        onClick={() => setMostrarFiltros((v) => !v)}
+        aria-expanded={mostrarFiltros}
+        className={`mb-6 inline-flex items-center gap-2 border rounded px-4 py-2 text-sm font-medium transition-colors ${
+          mostrarFiltros
+            ? "border-accent text-accent"
+            : "border-line text-ivory hover:border-accent hover:text-accent"
+        }`}
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          aria-hidden
         >
-          <option value="">Todas las marcas</option>
-          {marcas.map((m) => (
-            <option key={m.id} value={m.id}>
-              {m.nombre}
-            </option>
-          ))}
-        </select>
+          <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3" />
+        </svg>
+        Filtros
+        {filtrosActivos > 0 && (
+          <span className="inline-flex items-center justify-center h-5 w-5 rounded-full bg-accent text-ink text-xs font-semibold">
+            {filtrosActivos}
+          </span>
+        )}
+      </button>
 
-        <select
-          value={tipo}
-          onChange={(e) => setTipo(e.target.value)}
-          className={selectClass}
-        >
-          <option value="">Todos los tipos</option>
-          {Object.entries(TIPO_AUTO_LABELS).map(([valor, etiqueta]) => (
-            <option key={valor} value={valor}>
-              {etiqueta}
-            </option>
-          ))}
-        </select>
-
-        <select
-          value={condicion}
-          onChange={(e) => setCondicion(e.target.value)}
-          className={selectClass}
-        >
-          <option value="">Nuevo y usado</option>
-          {Object.entries(CONDICION_LABELS).map(([valor, etiqueta]) => (
-            <option key={valor} value={valor}>
-              {etiqueta}
-            </option>
-          ))}
-        </select>
-
-        {origenes.length > 0 && (
+      {mostrarFiltros && (
+        <div className="flex flex-col sm:flex-row sm:flex-wrap gap-3 mb-10">
           <select
-            value={origen}
-            onChange={(e) => setOrigen(e.target.value)}
+            value={marca}
+            onChange={(e) => setMarca(e.target.value)}
             className={selectClass}
           >
-            <option value="">Todos los orígenes</option>
-            {origenes.map((o) => (
-              <option key={o} value={o}>
-                {o}
+            <option value="">Todas las marcas</option>
+            {marcas.map((m) => (
+              <option key={m.id} value={m.id}>
+                {m.nombre}
               </option>
             ))}
           </select>
-        )}
 
-        <select
-          value={orden}
-          onChange={(e) => setOrden(e.target.value)}
-          className={selectClass}
-        >
-          <option value="reciente">Más recientes</option>
-          <option value="precio_asc">Precio: menor a mayor</option>
-          <option value="precio_desc">Precio: mayor a menor</option>
-        </select>
-      </div>
+          <select
+            value={tipo}
+            onChange={(e) => setTipo(e.target.value)}
+            className={selectClass}
+          >
+            <option value="">Todos los tipos</option>
+            {Object.entries(TIPO_AUTO_LABELS).map(([valor, etiqueta]) => (
+              <option key={valor} value={valor}>
+                {etiqueta}
+              </option>
+            ))}
+          </select>
+
+          <select
+            value={condicion}
+            onChange={(e) => setCondicion(e.target.value)}
+            className={selectClass}
+          >
+            <option value="">Nuevo y usado</option>
+            {Object.entries(CONDICION_LABELS).map(([valor, etiqueta]) => (
+              <option key={valor} value={valor}>
+                {etiqueta}
+              </option>
+            ))}
+          </select>
+
+          {origenes.length > 0 && (
+            <select
+              value={origen}
+              onChange={(e) => setOrigen(e.target.value)}
+              className={selectClass}
+            >
+              <option value="">Todos los orígenes</option>
+              {origenes.map((o) => (
+                <option key={o} value={o}>
+                  {o}
+                </option>
+              ))}
+            </select>
+          )}
+
+          <select
+            value={orden}
+            onChange={(e) => setOrden(e.target.value)}
+            className={selectClass}
+          >
+            <option value="reciente">Más recientes</option>
+            <option value="precio_asc">Precio: menor a mayor</option>
+            <option value="precio_desc">Precio: mayor a menor</option>
+          </select>
+        </div>
+      )}
 
       {cargando ? (
         <p className="text-muted text-sm">Cargando vehículos...</p>
