@@ -20,7 +20,7 @@ export async function DestacadosMasVendidos() {
 
   return (
     <section className="bg-panel border-y border-line">
-      <div className="mx-auto max-w-6xl px-6 py-20 grid grid-cols-1 lg:grid-cols-[320px_1fr] gap-10">
+      <div className="mx-auto max-w-[1600px] px-6 py-20 grid grid-cols-1 lg:grid-cols-[320px_1fr] gap-10">
         <div className="relative min-h-[220px] lg:min-h-full rounded-lg overflow-hidden bg-panel-raised">
           {config.bannerDestacadosUrl ? (
             <Image

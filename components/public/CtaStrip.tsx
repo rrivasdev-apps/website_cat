@@ -9,7 +9,7 @@ export async function CtaStrip() {
 
   return (
     <section className="bg-accent text-ink">
-      <div className="mx-auto max-w-6xl px-6 py-10 flex flex-col sm:flex-row items-center justify-between gap-6">
+      <div className="mx-auto max-w-[1600px] px-6 py-10 flex flex-col sm:flex-row items-center justify-between gap-6">
         <p className="font-display text-2xl sm:text-3xl tracking-wide text-center sm:text-left">
           ¿LISTO PARA ENCONTRAR TU PRÓXIMO VEHÍCULO?
         </p>

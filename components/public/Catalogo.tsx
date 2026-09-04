@@ -67,7 +67,7 @@ export function Catalogo({
     "bg-panel border border-line rounded px-3 py-2 text-sm text-ivory focus:outline-none focus:border-accent";
 
   return (
-    <section id="catalogo" className="mx-auto max-w-6xl px-6 py-20">
+    <section id="catalogo" className="mx-auto max-w-[1600px] px-6 py-20">
       <p className="text-accent text-sm font-semibold uppercase tracking-widest mb-2">
         Catálogo
       </p>

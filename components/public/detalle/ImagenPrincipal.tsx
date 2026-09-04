@@ -32,7 +32,7 @@ export function ImagenPrincipal({
       )}
       <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/30 to-transparent" />
 
-      <div className="relative h-full mx-auto max-w-6xl px-6 flex flex-col justify-end pb-10">
+      <div className="relative h-full mx-auto max-w-[1600px] px-6 flex flex-col justify-end pb-10">
         <p className="text-accent text-sm font-semibold uppercase tracking-widest mb-2">
           {marca}
         </p>

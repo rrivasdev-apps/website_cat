@@ -6,7 +6,7 @@ export async function Footer() {
 
   return (
     <footer className="border-t border-line bg-panel">
-      <div className="mx-auto max-w-6xl px-6 py-12 grid grid-cols-1 sm:grid-cols-3 gap-10">
+      <div className="mx-auto max-w-[1600px] px-6 py-12 grid grid-cols-1 sm:grid-cols-3 gap-10">
         <div>
           <p className="font-display text-2xl tracking-wide text-ivory">
             CATÁLOGO
@@ -66,7 +66,7 @@ export async function Footer() {
       </div>
 
       <div className="border-t border-line">
-        <div className="mx-auto max-w-6xl px-6 py-5 text-xs text-muted">
+        <div className="mx-auto max-w-[1600px] px-6 py-5 text-xs text-muted">
           {config.footerTextoLegal ?? (
             <span>
               © {new Date().getFullYear()} — Todos los derechos reservados.
