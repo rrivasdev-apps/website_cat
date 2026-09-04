@@ -42,6 +42,16 @@ export default async function VehiculosPage() {
                   >
                     {v.modelo} {v.version}
                   </Link>
+                  {v.esDestacado && (
+                    <span className="ml-2 inline-block px-1.5 py-0.5 rounded bg-amber-100 text-amber-700 text-[10px] align-middle">
+                      Destacado
+                    </span>
+                  )}
+                  {v.esMasVendido && (
+                    <span className="ml-2 inline-block px-1.5 py-0.5 rounded bg-purple-100 text-purple-700 text-[10px] align-middle">
+                      Más vendido
+                    </span>
+                  )}
                 </td>
                 <td className="px-4 py-3">{v.marca.nombre}</td>
                 <td className="px-4 py-3">{v.anio}</td>

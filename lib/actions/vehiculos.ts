@@ -4,11 +4,29 @@ import { revalidatePath } from "next/cache";
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { Prisma } from "@/lib/generated/prisma/client";
-import { vehiculoSchema, type VehiculoInput } from "@/lib/validation/vehiculo";
+import {
+  vehiculoSchema,
+  MAX_MAS_VENDIDOS,
+  type VehiculoInput,
+} from "@/lib/validation/vehiculo";
 
 async function requireSession() {
   const session = await auth();
   if (!session) throw new Error("No autorizado");
+}
+
+async function excedeLimiteMasVendidos(
+  esMasVendido: boolean,
+  excluirId?: string,
+): Promise<boolean> {
+  if (!esMasVendido) return false;
+  const cantidad = await prisma.vehiculo.count({
+    where: {
+      esMasVendido: true,
+      ...(excluirId ? { id: { not: excluirId } } : {}),
+    },
+  });
+  return cantidad >= MAX_MAS_VENDIDOS;
 }
 
 function esErrorSlugDuplicado(error: unknown): boolean {
@@ -25,6 +43,12 @@ export async function crearVehiculo(
 ): Promise<{ id: string } | { error: string }> {
   await requireSession();
   const datos = vehiculoSchema.parse(input);
+
+  if (await excedeLimiteMasVendidos(datos.esMasVendido)) {
+    return {
+      error: `Ya hay ${MAX_MAS_VENDIDOS} vehículos marcados como "más vendido". Quita alguno antes de agregar otro.`,
+    };
+  }
 
   try {
     const vehiculo = await prisma.vehiculo.create({ data: datos });
@@ -44,6 +68,12 @@ export async function actualizarVehiculo(
 ): Promise<{ ok: true } | { error: string }> {
   await requireSession();
   const datos = vehiculoSchema.parse(input);
+
+  if (await excedeLimiteMasVendidos(datos.esMasVendido, id)) {
+    return {
+      error: `Ya hay ${MAX_MAS_VENDIDOS} vehículos marcados como "más vendido". Quita alguno antes de agregar otro.`,
+    };
+  }
 
   try {
     await prisma.vehiculo.update({ where: { id }, data: datos });
@@ -92,6 +122,8 @@ export async function duplicarVehiculo(id: string): Promise<{ id: string }> {
       disponibilidad: original.disponibilidad,
       descripcion: original.descripcion,
       publicado: false,
+      esDestacado: false,
+      esMasVendido: false,
     },
   });
 

@@ -28,9 +28,15 @@ export const vehiculoSchema = z.object({
   disponibilidad: z.enum(Disponibilidad),
   descripcion: z.string().trim().min(1, "La descripción es obligatoria"),
   publicado: z.boolean(),
+  esDestacado: z.boolean(),
+  ordenDestacado: z.number().int().optional(),
+  esMasVendido: z.boolean(),
+  ordenMasVendido: z.number().int().optional(),
 });
 
 export type VehiculoInput = z.infer<typeof vehiculoSchema>;
+
+export const MAX_MAS_VENDIDOS = 5;
 
 export const TIPO_AUTO_LABELS: Record<TipoAuto, string> = {
   SUV: "SUV",

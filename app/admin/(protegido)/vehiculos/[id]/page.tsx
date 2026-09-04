@@ -46,6 +46,10 @@ export default async function EditarVehiculoPage({
           disponibilidad: vehiculo.disponibilidad,
           descripcion: vehiculo.descripcion,
           publicado: vehiculo.publicado,
+          esDestacado: vehiculo.esDestacado,
+          ordenDestacado: vehiculo.ordenDestacado ?? undefined,
+          esMasVendido: vehiculo.esMasVendido,
+          ordenMasVendido: vehiculo.ordenMasVendido ?? undefined,
         }}
       />
 

@@ -10,6 +10,7 @@ import {
   TIPO_AUTO_LABELS,
   CONDICION_LABELS,
   DISPONIBILIDAD_LABELS,
+  MAX_MAS_VENDIDOS,
 } from "@/lib/validation/vehiculo";
 import { crearVehiculo, actualizarVehiculo } from "@/lib/actions/vehiculos";
 import { slugify } from "@/lib/slug";
@@ -54,6 +55,8 @@ export function VehiculoForm({
       disponibilidad: "EN_TRANSITO",
       descripcion: "",
       publicado: false,
+      esDestacado: false,
+      esMasVendido: false,
     },
   });
 
@@ -319,6 +322,62 @@ export function VehiculoForm({
                 ),
               )}
             </select>
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset className="bg-white p-6 rounded-lg shadow border border-gray-200">
+        <legend className="text-base font-semibold px-1">Visibilidad</legend>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-4">
+          <div>
+            <div className="flex items-center gap-2">
+              <input
+                id="esDestacado"
+                type="checkbox"
+                {...register("esDestacado")}
+                className="h-4 w-4"
+              />
+              <label htmlFor="esDestacado" className="text-sm text-gray-700">
+                Destacado (aparece en el slider principal)
+              </label>
+            </div>
+            <label className="block text-xs text-gray-500 mt-2 mb-1">
+              Orden
+            </label>
+            <input
+              type="number"
+              {...register("ordenDestacado", {
+                setValueAs: (v) =>
+                  v === "" || v === undefined ? undefined : Number(v),
+              })}
+              className={`${inputClass} w-24`}
+            />
+          </div>
+
+          <div>
+            <div className="flex items-center gap-2">
+              <input
+                id="esMasVendido"
+                type="checkbox"
+                {...register("esMasVendido")}
+                className="h-4 w-4"
+              />
+              <label htmlFor="esMasVendido" className="text-sm text-gray-700">
+                Más vendido (máx. {MAX_MAS_VENDIDOS} a la vez)
+              </label>
+            </div>
+            <label className="block text-xs text-gray-500 mt-2 mb-1">
+              Orden
+            </label>
+            <input
+              type="number"
+              {...register("ordenMasVendido", {
+                setValueAs: (v) =>
+                  v === "" || v === undefined ? undefined : Number(v),
+              })}
+              className={`${inputClass} w-24`}
+            />
           </div>
         </div>
       </fieldset>
