@@ -12,22 +12,22 @@ export const metadata: Metadata = {
 const PASOS = [
   {
     numero: "01",
-    titulo: "Elegí tu vehículo",
-    texto: "Recorré el catálogo y filtrá por marca, tipo, condición u origen hasta encontrar el que buscás.",
+    titulo: "Elige tu vehículo",
+    texto: "Recorre el catálogo y filtra por marca, tipo, condición u origen hasta encontrar el que buscas.",
   },
   {
     numero: "02",
-    titulo: "Cotizá por WhatsApp",
-    texto: "Escribinos desde la ficha del vehículo. Te confirmamos disponibilidad y el precio final antes de avanzar.",
+    titulo: "Cotiza por WhatsApp",
+    texto: "Escríbenos desde la ficha del vehículo. Te confirmamos disponibilidad y el precio final antes de avanzar.",
   },
   {
     numero: "03",
-    titulo: "Coordiná el pago",
+    titulo: "Coordina el pago",
     texto: "Te enviamos el desglose de costos por escrito. Aceptamos tu vehículo actual como parte de pago.",
   },
   {
     numero: "04",
-    titulo: "Recibí tu vehículo",
+    titulo: "Recibe tu vehículo",
     texto: "Los tiempos de entrega dependen del origen: en Venezuela, en tránsito o todavía en origen.",
   },
 ];

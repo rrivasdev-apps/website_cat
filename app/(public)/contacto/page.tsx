@@ -4,7 +4,7 @@ import { Footer } from "@/components/public/Footer";
 
 export const metadata: Metadata = {
   title: "Contacto",
-  description: "Escribinos por WhatsApp para cotizar tu próximo vehículo.",
+  description: "Escríbenos por WhatsApp para cotizar tu próximo vehículo.",
 };
 
 export default async function ContactoPage() {
@@ -21,10 +21,10 @@ export default async function ContactoPage() {
             Contacto
           </p>
           <h1 className="font-display text-5xl sm:text-7xl tracking-wide text-ivory leading-none max-w-3xl">
-            ESCRIBINOS Y COTIZAMOS TU VEHÍCULO
+            ESCRÍBENOS Y COTIZAMOS TU VEHÍCULO
           </h1>
           <p className="mt-6 text-muted max-w-xl">
-            Contanos qué vehículo te interesa (o mandanos el enlace de la
+            Cuéntanos qué vehículo te interesa (o envíanos el enlace de la
             ficha) y te respondemos con precio, disponibilidad y tiempos de
             entrega.
           </p>
