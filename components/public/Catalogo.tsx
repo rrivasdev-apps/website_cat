@@ -64,7 +64,7 @@ export function Catalogo({
   };
 
   const selectClass =
-    "bg-panel border border-line rounded px-3 py-2 text-sm text-ivory focus:outline-none focus:border-accent";
+    "w-full sm:w-auto bg-panel border border-line rounded px-3 py-2 text-sm text-ivory focus:outline-none focus:border-accent";
 
   return (
     <section id="catalogo" className="mx-auto max-w-[1600px] px-6 py-20">
@@ -75,7 +75,7 @@ export function Catalogo({
         VEHÍCULOS DISPONIBLES
       </h2>
 
-      <div className="flex flex-wrap gap-3 mb-10">
+      <div className="flex flex-col sm:flex-row sm:flex-wrap gap-3 mb-10">
         <select
           value={marca}
           onChange={(e) => setMarca(e.target.value)}
