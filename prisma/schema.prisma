@@ -1,0 +1,142 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../lib/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Vehiculo {
+  id                             String         @id @default(cuid())
+  slug                           String         @unique
+  marcaId                        String
+  marca                          Marca          @relation(fields: [marcaId], references: [id])
+  modelo                         String
+  version                        String
+  anio                           Int
+  tipoAuto                       TipoAuto
+  condicion                      Condicion
+  origen                         String
+  precioEmbarque                 Decimal        @db.Decimal(12, 2)
+  precioLlegada                  Decimal        @db.Decimal(12, 2)
+  tasaBCVUsada                   Decimal        @db.Decimal(12, 4)
+  fechaPrecio                    DateTime
+  precioFinalOverride            Decimal?       @db.Decimal(12, 2)
+  disponibilidad                 Disponibilidad @default(EN_TRANSITO)
+  descripcion                    String         @db.Text
+  tiemposEntregaOverride         Json?
+  informacionImportanteOverride  String?        @db.Text
+  esDestacado                    Boolean        @default(false)
+  ordenDestacado                 Int?
+  esMasVendido                   Boolean        @default(false)
+  ordenMasVendido                Int?
+  publicado                      Boolean        @default(false)
+  createdAt                      DateTime       @default(now())
+  updatedAt                      DateTime       @updatedAt
+
+  especificaciones Especificacion[]
+  fotos            Foto[]
+  slides           Slide[]
+}
+
+enum TipoAuto {
+  SUV
+  SEDAN
+  PICKUP
+  HATCHBACK
+  VAN
+  COUPE
+  OTRO
+}
+
+enum Condicion {
+  NUEVO
+  USADO
+  SUBASTA
+}
+
+enum Disponibilidad {
+  EN_ORIGEN
+  EN_TRANSITO
+  DISPONIBLE_VENEZUELA
+}
+
+model Especificacion {
+  id         String     @id @default(cuid())
+  vehiculoId String
+  vehiculo   Vehiculo   @relation(fields: [vehiculoId], references: [id], onDelete: Cascade)
+  grupo      GrupoEspec
+  icono      String?
+  etiqueta   String
+  valor      String
+  orden      Int        @default(0)
+}
+
+enum GrupoEspec {
+  CARACTERISTICAS
+  EQUIPAMIENTO
+  EXTRAS
+}
+
+model Foto {
+  id         String   @id @default(cuid())
+  vehiculoId String
+  vehiculo   Vehiculo @relation(fields: [vehiculoId], references: [id], onDelete: Cascade)
+  url        String
+  esPortada  Boolean  @default(false)
+  orden      Int      @default(0)
+}
+
+model Marca {
+  id        String     @id @default(cuid())
+  nombre    String     @unique
+  logoUrl   String?
+  vehiculos Vehiculo[]
+}
+
+model Faq {
+  id        String  @id @default(cuid())
+  pregunta  String
+  respuesta String  @db.Text
+  orden     Int     @default(0)
+  publicado Boolean @default(true)
+}
+
+model Slide {
+  id         String   @id @default(cuid())
+  vehiculoId String
+  vehiculo   Vehiculo @relation(fields: [vehiculoId], references: [id], onDelete: Cascade)
+  orden      Int      @default(0)
+  activo     Boolean  @default(true)
+}
+
+model ConfiguracionGlobal {
+  id                       Int      @id @default(1)
+  tasaBCVVigente           Decimal  @db.Decimal(12, 4)
+  fechaTasaBCV             DateTime
+  tarifaServicioFija       Decimal  @db.Decimal(12, 2)
+  tiempoPreparacionDias    Int      @default(15)
+  tiempoTransitoDias       Int      @default(60)
+  tiempoAduanaDias         Int      @default(15)
+  informacionImportante    String   @db.Text
+  whatsappNumero           String
+  whatsappMensajePlantilla String   @db.Text
+  bannerDestacadosUrl      String?
+  footerTextoLegal         String?  @db.Text
+}
+
+model UsuarioAdmin {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  passwordHash String
+  nombre       String
+  rol          RolAdmin @default(ADMIN)
+  activo       Boolean  @default(true)
+  createdAt    DateTime @default(now())
+}
+
+enum RolAdmin {
+  ADMIN
+  EDITOR
+}
