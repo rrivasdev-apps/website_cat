@@ -42,29 +42,27 @@ export async function DestacadosMasVendidos() {
           </div>
         </div>
 
-        <div className="overflow-x-auto">
-          <div className="flex gap-5 overflow-x-auto pb-2 snap-x snap-mandatory scrollbar-showroom">
-            {vehiculos.map((v) => (
-              <div key={v.id} className="w-64 shrink-0 snap-start">
-                <VehiculoCard
-                  vehiculo={{
-                    slug: v.slug,
-                    marca: v.marca.nombre,
-                    marcaLogoUrl: v.marca.logoUrl,
-                    modelo: v.modelo,
-                    version: v.version,
-                    anio: v.anio,
-                    disponibilidad: v.disponibilidad,
-                    precioLlegada: v.precioLlegada.toNumber(),
-                    precioFinalOverride:
-                      v.precioFinalOverride?.toNumber() ?? null,
-                    fotoPortada: v.fotos[0]?.url ?? null,
-                    fotoTarjetaUrl: v.fotoTarjetaUrl,
-                  }}
-                />
-              </div>
-            ))}
-          </div>
+        <div className="flex gap-5 overflow-x-auto pb-2 snap-x snap-mandatory scrollbar-showroom">
+          {vehiculos.map((v) => (
+            <div key={v.id} className="w-64 shrink-0 snap-start">
+              <VehiculoCard
+                vehiculo={{
+                  slug: v.slug,
+                  marca: v.marca.nombre,
+                  marcaLogoUrl: v.marca.logoUrl,
+                  modelo: v.modelo,
+                  version: v.version,
+                  anio: v.anio,
+                  disponibilidad: v.disponibilidad,
+                  precioLlegada: v.precioLlegada.toNumber(),
+                  precioFinalOverride:
+                    v.precioFinalOverride?.toNumber() ?? null,
+                  fotoPortada: v.fotos[0]?.url ?? null,
+                  fotoTarjetaUrl: v.fotoTarjetaUrl,
+                }}
+              />
+            </div>
+          ))}
         </div>
       </div>
     </section>

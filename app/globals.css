@@ -40,7 +40,8 @@ body {
 
 .scrollbar-showroom {
   scrollbar-width: thin;
-  scrollbar-color: var(--color-line) transparent;
+  scrollbar-color: color-mix(in srgb, var(--color-muted) 55%, transparent)
+    var(--color-panel);
 }
 
 .scrollbar-showroom::-webkit-scrollbar {
@@ -49,11 +50,11 @@ body {
 }
 
 .scrollbar-showroom::-webkit-scrollbar-track {
-  background: transparent;
+  background-color: var(--color-panel);
 }
 
 .scrollbar-showroom::-webkit-scrollbar-thumb {
-  background-color: var(--color-line);
+  background-color: color-mix(in srgb, var(--color-muted) 55%, transparent);
   border-radius: 9999px;
 }
 
