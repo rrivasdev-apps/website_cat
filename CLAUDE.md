@@ -21,9 +21,11 @@ Nada del contenido del sitio va hardcodeado — todo lo que hoy sería "texto en
 código" (marcas, autos, preguntas frecuentes, tasa de cambio, textos legales) sale de
 la base de datos y se edita desde el panel.
 
-El nombre de marca, dominio, paleta y logo de este proyecto son
-**PENDIENTE DE CONFIRMAR** — no reutilizar el nombre ni las imágenes de ningún sitio
-usado como referencia visual durante el diseño de este documento.
+El nombre de marca es **Avan Motors** (confirmado) y ya cuenta con logo oficial
+(`public/logo-avan-transparent.png`), en uso en header y footer del sitio. Dominio y
+paleta definitiva del proyecto siguen **PENDIENTE DE CONFIRMAR** — no reutilizar
+imágenes de ningún sitio usado como referencia visual durante el diseño de este
+documento.
 
 ### Mercado objetivo y tono del contenido
 
@@ -342,7 +344,9 @@ BLOB_READ_WRITE_TOKEN=
 ## 11. Decisiones pendientes del negocio (no inventar, preguntar)
 
 - [ ] Fórmula real de precio final (ver sección 6).
-- [ ] Nombre de marca, dominio y paleta del nuevo proyecto.
+- [x] Nombre de marca y logo — **Avan Motors**, confirmado y aplicado en header,
+      footer y metadata del sitio.
+- [ ] Dominio y paleta definitiva del proyecto.
 - [ ] Número de WhatsApp y texto exacto de la plantilla de mensaje.
 - [ ] Textos legales exactos (registro fiscal, licencias) para el footer.
 - [x] Máximo de vehículos permitido en el slider de "Más Vendidos" — ya no es un

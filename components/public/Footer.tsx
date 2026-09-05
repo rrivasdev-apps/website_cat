@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { obtenerConfiguracionPublica } from "@/lib/data/configuracion";
 
@@ -8,12 +9,17 @@ export async function Footer() {
     <footer className="border-t border-line bg-panel">
       <div className="mx-auto max-w-[1600px] px-6 py-12 grid grid-cols-1 sm:grid-cols-3 gap-10">
         <div>
-          <p className="font-display text-2xl tracking-wide text-ivory">
-            CATÁLOGO
-          </p>
+          <Image
+            src="/logo-avan-transparent.png"
+            alt="Avan Motors"
+            width={160}
+            height={71}
+            className="h-10 w-auto"
+          />
           <p className="mt-3 text-sm text-muted max-w-xs">
-            Importación y venta de vehículos. Cotiza por WhatsApp y recibe el
-            detalle completo de costos antes de comprar.
+            Importación y venta de vehículos en Venezuela. Cotiza por
+            WhatsApp y recibe el detalle completo de costos antes de
+            comprar.
           </p>
         </div>
 
@@ -85,7 +91,8 @@ export async function Footer() {
         <div className="mx-auto max-w-[1600px] px-6 py-5 text-xs text-muted">
           {config.footerTextoLegal ?? (
             <span>
-              © {new Date().getFullYear()} — Todos los derechos reservados.
+              © {new Date().getFullYear()} Avan Motors — Todos los derechos
+              reservados.
             </span>
           )}
         </div>

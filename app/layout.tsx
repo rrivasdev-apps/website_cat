@@ -14,17 +14,17 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "Catálogo de Vehículos",
-    template: "%s | Catálogo de Vehículos",
+    default: "Avan Motors",
+    template: "%s | Avan Motors",
   },
   description:
-    "Importación y venta de vehículos. Catálogo actualizado con precios y disponibilidad.",
+    "Importación y venta de vehículos en Venezuela. Catálogo actualizado con precios y disponibilidad.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
-      lang="en"
+      lang="es"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">{children}</body>

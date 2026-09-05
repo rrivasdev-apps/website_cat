@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
@@ -23,13 +24,21 @@ export function Header() {
 
   return (
     <header className="fixed top-0 inset-x-0 z-50 bg-transparent">
-      <div className="mx-auto max-w-[1600px] px-6 py-5 flex items-center justify-between">
-        <Link
-          href="/"
-          onClick={() => setMenuAbierto(false)}
-          className="font-display text-xl tracking-wide text-ivory"
-        >
-          CATÁLOGO
+      <div
+        aria-hidden
+        className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-black/70 via-black/25 to-transparent pointer-events-none"
+      />
+
+      <div className="relative mx-auto max-w-[1600px] px-6 py-5 flex items-center justify-between">
+        <Link href="/" onClick={() => setMenuAbierto(false)}>
+          <Image
+            src="/logo-avan-transparent.png"
+            alt="Avan Motors"
+            width={140}
+            height={62}
+            priority
+            className="h-11 w-auto"
+          />
         </Link>
 
         <nav className="hidden sm:flex items-center gap-2">
