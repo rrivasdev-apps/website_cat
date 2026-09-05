@@ -49,7 +49,9 @@ export async function guardarConfiguracion(input: ConfiguracionInput) {
     update: datosDb,
   });
 
-  revalidatePath("/admin/configuracion");
+  revalidatePath("/admin/configuracion/general");
   revalidatePath("/admin/vehiculos");
   revalidatePath("/");
+  revalidatePath("/servicios");
+  revalidatePath("/contacto");
 }

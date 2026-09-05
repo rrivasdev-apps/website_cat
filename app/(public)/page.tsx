@@ -9,14 +9,10 @@ import { Footer } from "@/components/public/Footer";
 
 export default async function HomePage() {
   const [slides, marcas, origenesRaw, faqs, config] = await Promise.all([
-    prisma.slide.findMany({
-      where: { activo: true, vehiculo: { publicado: true } },
-      orderBy: { orden: "asc" },
-      include: {
-        vehiculo: {
-          include: { marca: true, fotos: { where: { esPortada: true }, take: 1 } },
-        },
-      },
+    prisma.vehiculo.findMany({
+      where: { esDestacado: true, publicado: true },
+      orderBy: { ordenDestacado: "asc" },
+      include: { marca: true, fotos: { where: { esPortada: true }, take: 1 } },
     }),
     prisma.marca.findMany({ orderBy: { nombre: "asc" } }),
     prisma.vehiculo.findMany({
@@ -34,15 +30,15 @@ export default async function HomePage() {
   return (
     <>
       <HeroSlider
-        slides={slides.map((s) => ({
-          slideId: s.id,
-          slug: s.vehiculo.slug,
-          marca: s.vehiculo.marca.nombre,
-          modelo: s.vehiculo.modelo,
-          version: s.vehiculo.version,
-          anio: s.vehiculo.anio,
-          precioLlegada: s.vehiculo.precioLlegada.toNumber(),
-          fotoPortada: s.vehiculo.fotos[0]?.url ?? null,
+        slides={slides.map((v) => ({
+          slideId: v.id,
+          slug: v.slug,
+          marca: v.marca.nombre,
+          modelo: v.modelo,
+          version: v.version,
+          anio: v.anio,
+          precioLlegada: v.precioLlegada.toNumber(),
+          fotoPortada: v.fotos[0]?.url ?? null,
         }))}
         intervaloSegundos={config.sliderIntervaloSegundos}
       />

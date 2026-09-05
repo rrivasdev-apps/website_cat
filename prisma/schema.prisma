@@ -38,7 +38,6 @@ model Vehiculo {
 
   especificaciones Especificacion[]
   fotos            Foto[]
-  slides           Slide[]
 }
 
 enum TipoAuto {
@@ -104,12 +103,29 @@ model Faq {
   publicado Boolean @default(true)
 }
 
-model Slide {
-  id         String   @id @default(cuid())
-  vehiculoId String
-  vehiculo   Vehiculo @relation(fields: [vehiculoId], references: [id], onDelete: Cascade)
-  orden      Int      @default(0)
-  activo     Boolean  @default(true)
+model PaginaServicios {
+  id            Int     @id @default(1)
+  heroImagenUrl String?
+  heroTitulo    String?
+  heroSlogan    String? @db.Text
+  tallerActivo  Boolean @default(true)
+  tallerTitulo  String?
+  tallerTexto   String? @db.Text
+}
+
+model ServicioItem {
+  id        String  @id @default(cuid())
+  titulo    String
+  texto     String  @db.Text
+  imagenUrl String?
+  orden     Int     @default(0)
+  publicado Boolean @default(true)
+}
+
+model PaginaContacto {
+  id        Int     @id @default(1)
+  titulo    String?
+  subtitulo String? @db.Text
 }
 
 model ConfiguracionGlobal {

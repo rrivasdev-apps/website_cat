@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { obtenerConfiguracionPublica } from "@/lib/data/configuracion";
+import { obtenerPaginaContacto } from "@/lib/data/paginas";
 import { Footer } from "@/components/public/Footer";
 
 export const metadata: Metadata = {
@@ -8,7 +9,10 @@ export const metadata: Metadata = {
 };
 
 export default async function ContactoPage() {
-  const config = await obtenerConfiguracionPublica();
+  const [config, pagina] = await Promise.all([
+    obtenerConfiguracionPublica(),
+    obtenerPaginaContacto(),
+  ]);
   const whatsappHref = config.whatsappNumero
     ? `https://wa.me/${config.whatsappNumero}`
     : null;
@@ -21,13 +25,9 @@ export default async function ContactoPage() {
             Contacto
           </p>
           <h1 className="font-display text-5xl sm:text-7xl tracking-wide text-ivory leading-none max-w-3xl">
-            ESCRÍBENOS Y COTIZAMOS TU VEHÍCULO
+            {pagina.titulo}
           </h1>
-          <p className="mt-6 text-muted max-w-xl">
-            Cuéntanos qué vehículo te interesa (o envíanos el enlace de la
-            ficha) y te respondemos con precio, disponibilidad y tiempos de
-            entrega.
-          </p>
+          <p className="mt-6 text-muted max-w-xl">{pagina.subtitulo}</p>
 
           <div className="mt-8 flex flex-col sm:flex-row gap-4">
             {whatsappHref ? (
