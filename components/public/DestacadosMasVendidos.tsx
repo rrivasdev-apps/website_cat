@@ -22,7 +22,7 @@ export async function DestacadosMasVendidos() {
     <section className="bg-panel border-y border-line">
       <div className="mx-auto max-w-[1600px] px-6 py-20 grid grid-cols-1 lg:grid-cols-[320px_1fr] gap-10">
         <div className="relative min-h-[220px] lg:min-h-full rounded-lg overflow-hidden bg-panel-raised">
-          {config.bannerDestacadosUrl ? (
+          {config.bannerDestacadosUrl && (
             <Image
               src={config.bannerDestacadosUrl}
               alt="Más vendidos"
@@ -30,23 +30,19 @@ export async function DestacadosMasVendidos() {
               className="object-cover"
               sizes="320px"
             />
-          ) : (
-            <div className="h-full w-full flex items-center justify-center p-6">
-              <p className="font-display text-3xl tracking-wide text-ivory text-center">
-                MÁS VENDIDOS
-              </p>
-            </div>
           )}
+          <div className="absolute inset-0 bg-gradient-to-b from-ink/85 via-ink/20 to-transparent" />
+          <div className="relative p-6">
+            <p className="text-accent text-sm font-semibold uppercase tracking-widest mb-2">
+              Destacados
+            </p>
+            <h2 className="font-display text-3xl tracking-wide text-ivory leading-none">
+              LOS MÁS VENDIDOS
+            </h2>
+          </div>
         </div>
 
         <div className="overflow-x-auto">
-          <p className="text-accent text-sm font-semibold uppercase tracking-widest mb-2">
-            Destacados
-          </p>
-          <h2 className="font-display text-4xl tracking-wide text-ivory mb-6">
-            LOS MÁS VENDIDOS
-          </h2>
-
           <div className="flex gap-5 overflow-x-auto pb-2 snap-x snap-mandatory scrollbar-showroom">
             {vehiculos.map((v) => (
               <div key={v.id} className="w-64 shrink-0 snap-start">
