@@ -54,6 +54,7 @@ export async function DestacadosMasVendidos() {
                   vehiculo={{
                     slug: v.slug,
                     marca: v.marca.nombre,
+                    marcaLogoUrl: v.marca.logoUrl,
                     modelo: v.modelo,
                     version: v.version,
                     anio: v.anio,
@@ -62,6 +63,7 @@ export async function DestacadosMasVendidos() {
                     precioFinalOverride:
                       v.precioFinalOverride?.toNumber() ?? null,
                     fotoPortada: v.fotos[0]?.url ?? null,
+                    fotoTarjetaUrl: v.fotoTarjetaUrl,
                   }}
                 />
               </div>

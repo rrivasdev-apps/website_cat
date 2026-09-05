@@ -23,6 +23,7 @@ model Vehiculo {
   tasaBCVUsada                   Decimal        @db.Decimal(12, 4)
   fechaPrecio                    DateTime
   precioFinalOverride            Decimal?       @db.Decimal(12, 2)
+  fotoTarjetaUrl                 String?
   disponibilidad                 Disponibilidad @default(EN_TRANSITO)
   descripcion                    String         @db.Text
   tiemposEntregaOverride         Json?

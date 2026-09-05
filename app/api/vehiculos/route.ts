@@ -57,6 +57,7 @@ export async function GET(request: Request) {
       id: v.id,
       slug: v.slug,
       marca: v.marca.nombre,
+      marcaLogoUrl: v.marca.logoUrl,
       modelo: v.modelo,
       version: v.version,
       anio: v.anio,
@@ -66,6 +67,7 @@ export async function GET(request: Request) {
       precioLlegada: v.precioLlegada.toNumber(),
       precioFinalOverride: v.precioFinalOverride?.toNumber() ?? null,
       fotoPortada: v.fotos[0]?.url ?? null,
+      fotoTarjetaUrl: v.fotoTarjetaUrl,
     })),
     nextCursor: hayMas ? pagina[pagina.length - 1]?.id : null,
   });

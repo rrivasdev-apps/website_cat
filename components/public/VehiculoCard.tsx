@@ -7,6 +7,7 @@ import type { Disponibilidad } from "@/lib/generated/prisma/enums";
 export type VehiculoTarjeta = {
   slug: string;
   marca: string;
+  marcaLogoUrl: string | null;
   modelo: string;
   version: string;
   anio: number;
@@ -14,6 +15,7 @@ export type VehiculoTarjeta = {
   precioLlegada: number;
   precioFinalOverride: number | null;
   fotoPortada: string | null;
+  fotoTarjetaUrl: string | null;
 };
 
 const DISPONIBILIDAD_COLOR: Record<Disponibilidad, string> = {
@@ -30,20 +32,38 @@ export function VehiculoCard({
   prioridad?: boolean;
 }) {
   const precio = vehiculo.precioFinalOverride ?? vehiculo.precioLlegada;
+  const fotoTarjeta = vehiculo.fotoTarjetaUrl ?? vehiculo.fotoPortada;
 
   return (
     <Link
       href={`/catalogo/${vehiculo.slug}`}
-      className="group block bg-panel border border-line rounded-lg overflow-hidden hover:border-accent/60 transition-colors"
+      className="group block bg-panel border border-line rounded-xl overflow-hidden hover:border-accent/60 transition-colors p-4"
     >
-      <div className="relative aspect-[4/3] bg-panel-raised">
-        {vehiculo.fotoPortada ? (
+      <div className="relative aspect-[4/3]">
+        <div className="absolute inset-x-0 top-0 flex items-center justify-between z-10">
+          {vehiculo.marcaLogoUrl ? (
+            <Image
+              src={vehiculo.marcaLogoUrl}
+              alt={vehiculo.marca}
+              width={72}
+              height={28}
+              className="h-6 w-auto object-contain"
+            />
+          ) : (
+            <span className="text-[11px] font-semibold uppercase tracking-widest text-muted">
+              {vehiculo.marca}
+            </span>
+          )}
+          <span className="text-xs text-muted">{vehiculo.anio}</span>
+        </div>
+
+        {fotoTarjeta ? (
           <Image
-            src={vehiculo.fotoPortada}
+            src={fotoTarjeta}
             alt={`${vehiculo.marca} ${vehiculo.modelo} ${vehiculo.version}`}
             fill
             priority={prioridad}
-            className="object-cover group-hover:scale-105 transition-transform duration-300"
+            className="object-contain p-6 group-hover:scale-105 transition-transform duration-300"
             sizes="(min-width: 1024px) 25vw, (min-width: 640px) 33vw, 100vw"
           />
         ) : (
@@ -51,21 +71,19 @@ export function VehiculoCard({
             Sin foto
           </div>
         )}
+
         <span
-          className={`absolute top-3 left-3 px-2 py-1 rounded-full text-[11px] font-medium ${DISPONIBILIDAD_COLOR[vehiculo.disponibilidad]}`}
+          className={`absolute bottom-0 left-0 px-2 py-1 rounded-full text-[11px] font-medium ${DISPONIBILIDAD_COLOR[vehiculo.disponibilidad]}`}
         >
           {DISPONIBILIDAD_LABELS[vehiculo.disponibilidad]}
         </span>
       </div>
 
-      <div className="p-4">
-        <p className="text-xs uppercase tracking-widest text-muted">
-          {vehiculo.marca} · {vehiculo.anio}
-        </p>
-        <h3 className="font-display text-xl tracking-wide text-ivory mt-1">
+      <div className="pt-2">
+        <p className="text-sm text-muted truncate">
           {vehiculo.modelo} {vehiculo.version}
-        </h3>
-        <p className="mt-2 text-accent font-semibold">
+        </p>
+        <p className="mt-1 text-accent font-display text-2xl tracking-wide">
           {formatoUSD(precio)}
         </p>
       </div>
