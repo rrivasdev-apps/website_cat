@@ -47,7 +47,7 @@ export async function DestacadosMasVendidos() {
             LOS MÁS VENDIDOS
           </h2>
 
-          <div className="flex gap-5 overflow-x-auto pb-2 snap-x snap-mandatory">
+          <div className="flex gap-5 overflow-x-auto pb-2 snap-x snap-mandatory scrollbar-showroom">
             {vehiculos.map((v) => (
               <div key={v.id} className="w-64 shrink-0 snap-start">
                 <VehiculoCard
