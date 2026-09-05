@@ -21,3 +21,5 @@ npm-debug.log*
 # prisma
 /prisma/*.db
 /lib/generated/prisma
+.vercel
+.env*
